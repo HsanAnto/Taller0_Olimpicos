@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.lang.model.type.NullType;
+import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
+
 import uniandes.dpoo.taller0.modelo.Atleta;
 import uniandes.dpoo.taller0.modelo.Evento;
 import uniandes.dpoo.taller0.modelo.Genero;
@@ -444,4 +447,11 @@ public class CalculadoraEstadisticas
 		return nombres;
 	}
 
+	public String preguntarPaisAtleta(String nombreAtleta)
+	{
+		Atleta elAtleta = buscarAtleta(nombreAtleta);
+		Pais elPais = elAtleta.darPais();
+		String nombre = elPais.darNombre();
+		return nombre;
+	}
 }

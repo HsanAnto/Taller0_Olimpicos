@@ -62,7 +62,9 @@ public class ConsolaOlimpicos
 					ejecutarMedallistasPorNacionYGenero();
 				else if (opcion_seleccionada == 12 && calculadora != null)
 					ejecutarPorcentajeMedallistas();
-				else if (opcion_seleccionada == 13)
+				else if (opcion_seleccionada == 13 && calculadora != null)
+					ejecutarPreguntarPaisAtleta();
+				else if (opcion_seleccionada == 14)
 				{
 					System.out.println("Saliendo de la aplicación ...");
 					continuar = false;
@@ -102,7 +104,8 @@ public class ConsolaOlimpicos
 		System.out.println("10. Consultar el atleta todoterreno");
 		System.out.println("11. Consultar los medallistas por país y género");
 		System.out.println("12. Consultar el porcentaje de atletas que son medallistas");
-		System.out.println("13. Salir de la aplicación\n");
+		System.out.println("13. Consultar el pais de un atleta");
+		System.out.println("14. Salir de la aplicación\n");
 	}
 
 	/**
@@ -373,11 +376,10 @@ public class ConsolaOlimpicos
 	{
 		System.out.println("\n" + "Cargar un archivo de atletas" + "\n");
 
-		String archivo = input("Por favor ingrese el nombre del archivo CSV con los atletas");
 		try
 		{
-			calculadora = LoaderOlimpicos.cargarArchivo(archivo);
-			System.out.println("Se cargó el archivo " + archivo + " con información de los Juegos Olímpicos.");
+			calculadora = LoaderOlimpicos.cargarArchivo("./data/atletas.csv");
+			System.out.println("Se cargó el archivo con información de los Juegos Olímpicos.");
 			Collection<String> eventos = calculadora.darNombresDeportes();
 			System.out.println("Los deportes para los que se tiene información son:");
 			for (String dep : eventos)
@@ -395,6 +397,20 @@ public class ConsolaOlimpicos
 			System.out.println(e.getMessage());
 		}
 
+	}
+	private void ejecutarPreguntarPaisAtleta()
+	{
+		System.out.println("\n" + "Cargargando..." + "\n");
+		String atleta = input("Por favor ingrese el nombre del atleta del que desea conoer el pais que representa");
+		try
+		{
+			String pais = calculadora.preguntarPaisAtleta(atleta);
+			System.out.println("El pais al que pertenece el atleta " + atleta + " es: " + pais);
+		}
+		catch (Exception e)
+		{
+			System.out.println("No se encontró el pais del atleta");
+		}
 	}
 
 	/**
